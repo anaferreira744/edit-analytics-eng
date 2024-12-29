@@ -21,6 +21,8 @@ models:
       +schema: staging
     marts:
       +schema: marts
+    reporting:
+      +schema: reporting
 
 seeds:
   +schema: raw

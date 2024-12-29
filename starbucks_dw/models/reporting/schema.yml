@@ -1,0 +1,109 @@
+version: 2
+
+models:
+  - name: cust_segm_responsiveness
+    description: >
+      This model segments customers by demographic and behavioral attributes, such as
+      gender, age group, income segment, and subscription duration. It also calculates
+      the response rate for each customer segment by offer type.
+    columns:
+      - name: gender
+        description: Customer's gender
+        data_type: text
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - M
+                - F
+                - O
+                - N/A
+      - name: income_segment
+        description: Customer income segmentation
+        data_type: text
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - Low Income (<25k)
+                - Middle Income (25k-75k)
+                - High Income (>75k)
+                - Unknown
+      - name: age_group
+        description: Customer Age segmentation
+        data_type: text
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - '18-25'
+                - '26-35'
+                - '36-45'
+                - '46-55'
+                - '55+'
+                - Unknown
+      - name: subscription_duration_group
+        description: Customer's Subscription duration categories
+        data_type: text
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - 'Less than 1 year'
+                - '1-4 years'
+                - '5-7 years'
+                - '8-10 years'
+                - 'More than 10 years'
+                - 'Unknown'
+      - name: offer_type
+        description: The type of offer sent to customers
+        data_type: text
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - bogo
+                - discount
+                - informational
+      - name: response_rate
+        description: >
+          The percentage of successful responses (completed transactions)
+          divided by total offers sent to each customer segment
+        data_type: numeric
+        data_test:
+          - response_rate_valid_test
+
+
+  - name: channel_effectiveness
+    description: >
+      This model evaluates the effectiveness of communication channels and offer types
+      by calculating the response rate (ratio of successful responses (completed transactions) to total offers received).
+    columns:
+      - name: offer_channel
+        description: The channel through which the offer was communicated
+        data_type: text
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - email
+                - mobile
+                - social
+                - web
+      - name: offer_type
+        description: The type of offer being analyzed
+        data_type: text
+        data_tests:
+          - not_null
+          - accepted_values:
+              values:
+                - bogo
+                - discount
+                - informational
+      - name: response_rate
+        description: >
+          The percentage of successful responses (completed transactions)
+          divided by total offers sent for each channel and type.
+        data_type: numeric
+        tests:
+        - response_rate_valid_test
