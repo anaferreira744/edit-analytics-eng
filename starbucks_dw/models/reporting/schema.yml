@@ -70,7 +70,7 @@ models:
           The percentage of successful responses (completed transactions)
           divided by total offers sent to each customer segment
         data_type: numeric
-        data_test:
+        tests:
           - response_rate_valid_test
 
 

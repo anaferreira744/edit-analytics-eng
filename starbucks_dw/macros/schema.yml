@@ -24,6 +24,3 @@ macros:
       - name: total_column
         description: column for total offers sent
         type: numeric
-
-  - name: response_rate_valid
-    description: validation of response rate
